@@ -29,6 +29,7 @@ using Microsoft.VisualStudio.Threading;
 using SonarLint.VisualStudio.Core;
 using SonarLint.VisualStudio.Core.Analysis;
 using SonarLint.VisualStudio.Core.Telemetry;
+using SonarLint.VisualStudio.Infrastructure.VS;
 using SonarLint.VisualStudio.TypeScript.EslintBridgeClient;
 using SonarLint.VisualStudio.TypeScript.Rules;
 
@@ -37,19 +38,25 @@ namespace SonarLint.VisualStudio.TypeScript.Analyzer
     [Export(typeof(IAnalyzer))]
     internal sealed class JavaScriptAnalyzer : IAnalyzer, IDisposable
     {
+        private readonly IWorkspaceService workspaceService;
+        private readonly IJavaScriptEslintBridgeClient eslintBridgeClient;
         private readonly ITelemetryManager telemetryManager;
         private readonly IAnalysisStatusNotifierFactory analysisStatusNotifierFactory;
         private readonly IEslintBridgeAnalyzer eslintBridgeAnalyzer;
         private readonly IThreadHandling threadHandling;
 
         [ImportingConstructor]
-        public JavaScriptAnalyzer(IJavaScriptEslintBridgeClient eslintBridgeClient,
+        public JavaScriptAnalyzer(
+            IWorkspaceService workspaceService,
+            IJavaScriptEslintBridgeClient eslintBridgeClient,
             IRulesProviderFactory rulesProviderFactory,
             ITelemetryManager telemetryManager,
             IAnalysisStatusNotifierFactory analysisStatusNotifierFactory,
             IEslintBridgeAnalyzerFactory eslintBridgeAnalyzerFactory,
             IThreadHandling threadHandling)
         {
+            this.workspaceService = workspaceService;
+            this.eslintBridgeClient = eslintBridgeClient;
             this.telemetryManager = telemetryManager;
             this.analysisStatusNotifierFactory = analysisStatusNotifierFactory;
             this.threadHandling = threadHandling;
@@ -87,8 +94,10 @@ namespace SonarLint.VisualStudio.TypeScript.Analyzer
 
             try
             {
+                var dir = workspaceService.FindRootDirectory();
+                var tsConfigPath = await eslintBridgeClient.InitTSConfigForTypedRules(dir, cancellationToken);
                 var stopwatch = Stopwatch.StartNew();
-                var issues = await eslintBridgeAnalyzer.Analyze(filePath, null, cancellationToken);
+                var issues = await eslintBridgeAnalyzer.Analyze(filePath, tsConfigPath, cancellationToken);
                 analysisStatusNotifier.AnalysisFinished(issues.Count, stopwatch.Elapsed);
 
                 if (issues.Any())

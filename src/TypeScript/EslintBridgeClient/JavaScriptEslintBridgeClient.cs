@@ -18,13 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.ComponentModel.Composition;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SonarLint.VisualStudio.Integration;
+using SonarLint.VisualStudio.TypeScript.EslintBridgeClient.Contract;
 
 namespace SonarLint.VisualStudio.TypeScript.EslintBridgeClient
 {
     internal interface IJavaScriptEslintBridgeClient : IEslintBridgeClient
-    { }
+    {
+        Task<string> InitTSConfigForTypedRules(string baseDirectory, CancellationToken cancellationToken);
+    }
 
     [Export(typeof(IJavaScriptEslintBridgeClient))]
     [PartCreationPolicy(CreationPolicy.Shared)]
@@ -34,6 +41,23 @@ namespace SonarLint.VisualStudio.TypeScript.EslintBridgeClient
         public JavaScriptEslintBridgeClient(IEslintBridgeProcessFactory eslintBridgeProcessFactory, ILogger logger) 
             : base("analyze-js", eslintBridgeProcessFactory.Create(), logger)
         {
+        }
+
+        public async Task<string> InitTSConfigForTypedRules(string baseDirectory, CancellationToken cancellationToken)
+        {
+            var initTsConfigRequest = new InitTSConfigRequest
+            {
+                BaseDirectory = baseDirectory
+            };
+
+            var responseString = await MakeCall("create-tsconfig-file", initTsConfigRequest, cancellationToken);
+
+            if (string.IsNullOrEmpty(responseString))
+            {
+                throw new InvalidOperationException(string.Format(Resources.ERR_InvalidResponse, responseString));
+            }
+
+            return JsonConvert.DeserializeObject<InitTSConfigResponse>(responseString)?.FileName;
         }
     }
 }
