@@ -28,6 +28,8 @@
   </PropertyGroup>
 
   <ItemGroup Label="Taint Xaml Sources">
+    <None Remove="poc theme\MainWindow.xaml" />
+    <None Remove="poc theme\TabResources.xaml" />
     <None Remove="Taint\TaintList\sonarlint.png" />
     <Resource Include="Taint\TaintList\sonarlint.png" />
   </ItemGroup>
@@ -58,8 +60,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="poc theme\TabResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SharedUI\SharedResources.xaml">
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="poc theme\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
     <Page Include="Taint\TaintList\TaintIssuesControl.xaml">
       <Generator>XamlIntelliSenseFileGenerator</Generator>

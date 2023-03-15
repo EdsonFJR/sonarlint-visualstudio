@@ -28,6 +28,7 @@ using Microsoft.VisualStudio.Shell;
 using SonarLint.VisualStudio.Integration;
 using SonarLint.VisualStudio.IssueVisualization.Security.Commands;
 using SonarLint.VisualStudio.IssueVisualization.Security.Hotspots.HotspotsList;
+using SonarLint.VisualStudio.IssueVisualization.Security.poc_theme;
 using SonarLint.VisualStudio.IssueVisualization.Security.Taint;
 using SonarLint.VisualStudio.IssueVisualization.Security.Taint.TaintList;
 using Task = System.Threading.Tasks.Task;
@@ -47,6 +48,7 @@ namespace SonarLint.VisualStudio.IssueVisualization.Security
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid("D7D54E08-45E1-49A6-AA53-AF1CFAA6EBDC")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideToolWindow(typeof(TestToolWindow), MultiInstances = false, Transient = true, Style = VsDockStyle.Float, Window = VsWindowKindErrorList, Width = 700, Height = 250)]
     [ProvideToolWindow(typeof(HotspotsToolWindow), MultiInstances = false, Transient = true, Style = VsDockStyle.Tabbed, Window = VsWindowKindErrorList, Width = 700, Height = 250)]
     [ProvideToolWindow(typeof(TaintToolWindow), MultiInstances = false, Transient = false, // Note: Transient must false when using ProvideToolWindowVisibility
         Style = VsDockStyle.Tabbed, Window = VsWindowKindErrorList, Width = 700, Height = 250)]
@@ -76,6 +78,10 @@ namespace SonarLint.VisualStudio.IssueVisualization.Security
             await ShowToolWindowCommand.CreateAsync(this,
                 new CommandID(Constants.CommandSetGuid, Constants.TaintToolWindowCommandId),
                 TaintToolWindow.ToolWindowId);
+
+            await ShowToolWindowCommand.CreateAsync(this,
+                new CommandID(Constants.CommandSetGuid, Constants.TestToolWindowCommandId),
+                TestToolWindow.ToolWindowId);
 
             logger.WriteLine(Resources.FinishedPackageInitialization);
         }

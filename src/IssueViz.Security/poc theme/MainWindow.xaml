@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="SonarLint.VisualStudio.IssueVisualization.Security.poc_theme.MainWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             xmlns:pocTheme="clr-namespace:SonarLint.VisualStudio.IssueVisualization.Security.Taint.TaintList.poc_theme">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<StaticResource ResourceKey="{x:Static vsshell:VsResourceKeys.ThemedDialogDefaultStylesKey}" />
+                <StaticResource ResourceKey="{x:Static vsshell:VsResourceKeys.ThemedDialogTreeViewStyleKey}" />-->
+                <ResourceDictionary Source="./TabResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid UseLayoutRounding="True">
+        <DockPanel LastChildFill="True">
+            <pocTheme:NestingFlowDocumentScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <FlowDocument PagePadding="0">
+                    <Paragraph>1</Paragraph>    
+                    <Paragraph>1</Paragraph>
+                    <Paragraph>1</Paragraph>
+                    <Paragraph>1</Paragraph>
+                    <Paragraph>1</Paragraph>
+                    <Paragraph>1</Paragraph>
+                    <Paragraph>1</Paragraph>
+
+                    <BlockUIContainer>
+                        <TabControl TabStripPlacement="Top">
+                            <TabItem  Header="AAAA" HorizontalAlignment="Left" Margin="-2,-2,0,0" Width="59">
+                                <FlowDocumentScrollViewer
+                                HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"
+                                >
+                                    <FlowDocument>
+                                        <Paragraph>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Paragraph>
+                                        <Paragraph>a</Paragraph>
+                                        <Paragraph>a</Paragraph>
+                                        <Paragraph>a</Paragraph>
+                                        <Paragraph>a</Paragraph>
+                                        <Paragraph>a</Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </TabItem>
+                            <TabItem Header="BBBB">
+                                <FlowDocumentScrollViewer
+                            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+                                    <FlowDocument>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                        <Paragraph>b</Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </TabItem>
+
+                        </TabControl>
+                    </BlockUIContainer>
+                    <Paragraph>end</Paragraph>
+                    <Paragraph>end</Paragraph>
+                    <Paragraph>end</Paragraph>
+                </FlowDocument>
+            </pocTheme:NestingFlowDocumentScrollViewer>
+        </DockPanel>
+    </Grid>
+</UserControl>

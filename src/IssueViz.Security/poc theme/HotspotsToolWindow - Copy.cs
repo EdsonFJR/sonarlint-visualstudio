@@ -19,15 +19,21 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.Shell;
 
-namespace SonarLint.VisualStudio.IssueVisualization.Security.Commands
+namespace SonarLint.VisualStudio.IssueVisualization.Security.poc_theme
 {
-    internal static class Constants
+    [Guid(ToolWindowIdAsString)]
+    public class TestToolWindow : ToolWindowPane
     {
-        public static readonly Guid CommandSetGuid = new Guid("97856422-20A2-4DB5-A468-1BAA9B6EEC38");
+        private const string ToolWindowIdAsString = "0e67dd49-fd90-494b-9323-a4fe26905f2a";
+        public static readonly Guid ToolWindowId = new Guid(ToolWindowIdAsString);
 
-        public const int HotspotsToolWindowCommandId = 0x0100;
-        public const int TaintToolWindowCommandId = 0x0101;
-        public static int TestToolWindowCommandId = 0x0102;
+        public TestToolWindow()
+        {
+            Caption = Resources.HotspotsToolWindowCaption;
+            Content = new MainWindow();
+        }
     }
 }

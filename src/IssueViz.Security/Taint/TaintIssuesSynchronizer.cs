@@ -102,6 +102,9 @@ namespace SonarLint.VisualStudio.IssueVisualization.Security.Taint
                     serverBranch,
                     CancellationToken.None);
 
+                var x = await sonarQubeService.GetSuppressedIssuesAsync(projectKey, serverBranch, null,
+                    CancellationToken.None);
+
                 logger.WriteLine(TaintResources.Synchronizer_NumberOfServerIssues, taintVulnerabilities.Count);
 
                 var analysisInformation = await GetAnalysisInformation(projectKey, serverBranch);
