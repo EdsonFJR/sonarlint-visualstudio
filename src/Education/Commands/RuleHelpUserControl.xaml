@@ -6,6 +6,7 @@
              
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xamlGenerator="clr-namespace:SonarLint.VisualStudio.Education.XamlGenerator"
              mc:Ignorable="d" >
     
     <UserControl.Resources>
@@ -239,7 +240,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <FlowDocumentScrollViewer x:Name="docViewer" Hyperlink.RequestNavigate="HandleRequestNavigate">
+    <xamlGenerator:NestingFlowDocumentScrollViewer x:Name="docViewer" Hyperlink.RequestNavigate="HandleRequestNavigate">
         <FlowDocument>
             
             <!-- Design-time only control to check the embedding and rendering of the images.
@@ -298,5 +299,5 @@
                 <Hyperlink NavigateUri="https://rules.sonarsource.com/">https://rules.sonarsource.com</Hyperlink>
             </Paragraph>
         </FlowDocument>
-    </FlowDocumentScrollViewer>
+    </xamlGenerator:NestingFlowDocumentScrollViewer>
 </UserControl>
