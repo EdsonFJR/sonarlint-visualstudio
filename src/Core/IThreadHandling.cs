@@ -91,12 +91,6 @@ namespace SonarLint.VisualStudio.Core
         /// </summary>
         /// <remarks>Wrapper that calls <see cref="TaskScheduler.Default"/></remarks>
         IAwaitableWrapper SwitchToBackgroundThread();
-        
-        /// <summary>
-        /// Switches to the main thread
-        /// </summary>
-        /// <remarks>Wrapper that calls <see cref="ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync()"/></remarks>
-        Task SwitchToMainThreadAsync();
     }
 
     // Wrappers for awaiter /awaitable to avoid VS-specific types on the interface
