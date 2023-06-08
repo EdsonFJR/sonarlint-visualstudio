@@ -47,6 +47,7 @@ namespace SonarLint.VisualStudio.TestInfrastructure
         public Task<T> RunOnBackgroundThread<T>(Func<Task<T>> asyncMethod) => asyncMethod();
 
         public IAwaitableWrapper SwitchToBackgroundThread() => new NoOpAwaitable();
+        public Task SwitchToMainThreadAsync() => Task.CompletedTask;
 
         public void ThrowIfNotOnUIThread() { /* no-op */ }
 
